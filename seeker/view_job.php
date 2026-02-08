@@ -34,89 +34,112 @@ $has_applied = $check_stmt->rowCount() > 0;
 $is_expired = strtotime($job['deadline']) < time();
 ?>
 
-<div class="container-fluid">
-    <div class="card shadow-sm border-0">
-        <div class="card-header bg-white py-3 border-0 d-flex justify-content-between align-items-center">
-            <h4 class="m-0 fw-bold text-primary">
-                <i class="fas fa-briefcase me-2"></i><?php echo htmlspecialchars($job['title']); ?>
-                <?php if ($is_expired): ?>
-                    <span class="badge bg-danger ms-2"><i class="fas fa-exclamation-triangle me-1"></i> Waqtigu waa dhammaaday</span>
-                <?php endif; ?>
-            </h4>
-            <span class="badge bg-light text-dark border"><?php echo htmlspecialchars($job['category']); ?></span>
-        </div>
-        <div class="card-body">
-            <?php if ($is_expired): ?>
-                <div class="alert alert-warning border-0 shadow-sm d-flex align-items-center mb-4">
-                    <i class="fas fa-info-circle fa-2x me-3 text-warning"></i>
-                    <div>
-                        <h6 class="fw-bold mb-1 text-dark">Waqtiga shaqadan waa dhammaaday (Expired)</h6>
-                        <p class="mb-0 small text-muted">Shaqadan waqtigii loo qabtay wuxuu ku ekaa <strong><?php echo date('M d, Y \k\u bimaneyso H:i', strtotime($job['deadline'])); ?></strong>. Hadda codsiyo cusub lama aqbalayo.</p>
+<div class="container-fluid py-4">
+    <div class="row g-4 fade-in-up">
+        <!-- Main Job Info -->
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body p-4 p-md-5">
+                    <div class="d-flex justify-content-between align-items-start mb-4">
+                        <div>
+                            <span class="badge bg-primary-soft text-primary px-3 py-2 rounded-pill small fw-bold text-uppercase ls-wide mb-3 d-inline-block"><?php echo htmlspecialchars($job['category']); ?></span>
+                            <h2 class="display-6 fw-bold text-dark mb-1"><?php echo htmlspecialchars($job['title']); ?></h2>
+                            <p class="text-muted d-flex align-items-center">
+                                <i class="fas fa-calendar-alt me-2 text-accent"></i> Posted on <?php echo date('M d, Y', strtotime($job['created_at'])); ?>
+                            </p>
+                        </div>
+                        <?php if ($is_expired): ?>
+                            <div class="bg-danger bg-opacity-10 text-danger px-4 py-2 rounded-4 text-center">
+                                <i class="fas fa-clock fa-lg d-block mb-1"></i>
+                                <small class="fw-bold text-uppercase ls-tight">Expired</small>
+                            </div>
+                        <?php endif; ?>
                     </div>
-                </div>
-            <?php endif; ?>
 
-            <div class="row g-3 mb-4">
-                <div class="col-md-6">
-                    <div class="d-flex align-items-center mb-2">
-                        <i class="fas fa-map-marker-alt text-secondary me-3 fa-lg"></i>
-                        <div>
-                            <small class="text-muted d-block">Location</small>
-                            <strong><?php echo htmlspecialchars($job['location']); ?></strong>
+                    <?php if ($is_expired): ?>
+                        <div class="glass border-danger border-opacity-25 p-4 rounded-4 mb-5">
+                            <div class="d-flex align-items-center">
+                                <div class="bg-danger bg-opacity-10 p-3 rounded-circle me-3">
+                                    <i class="fas fa-info-circle text-danger fa-xl"></i>
+                                </div>
+                                <div>
+                                    <h6 class="fw-bold mb-1 text-danger">Waqtiga shaqadan waa dhammaaday</h6>
+                                    <p class="mb-0 small text-muted">Shaqadan waqtigii loo qabtay wuxuu ku ekaa <strong><?php echo date('M d, Y H:i', strtotime($job['deadline'])); ?></strong>.</p>
+                                </div>
+                            </div>
                         </div>
+                    <?php endif; ?>
+
+                    <h5 class="fw-bold mb-3 text-dark">Job Description</h5>
+                    <div class="description-content text-secondary lh-lg fs-5 mb-5" style="white-space: pre-line;">
+                        <?php echo htmlspecialchars($job['description']); ?>
                     </div>
-                    <div class="d-flex align-items-center">
-                        <i class="fas fa-money-bill-wave text-success me-3 fa-lg"></i>
-                        <div>
-                            <small class="text-muted d-block">Salary Range</small>
-                            <strong><?php echo htmlspecialchars($job['salary_range']); ?></strong>
+
+                    <div class="row g-4 pt-4 border-top">
+                        <div class="col-sm-6 col-md-4 text-center">
+                            <div class="bg-light p-3 rounded-4">
+                                <i class="fas fa-location-dot text-accent fa-xl mb-3"></i>
+                                <small class="text-muted d-block mb-1 text-uppercase ls-wide">Location</small>
+                                <span class="fw-bold text-dark"><?php echo htmlspecialchars($job['location']); ?></span>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="d-flex align-items-center mb-2">
-                        <i class="fas fa-calendar-alt text-info me-3 fa-lg"></i>
-                        <div>
-                            <small class="text-muted d-block">Posted On</small>
-                            <strong><?php echo date('M d, Y', strtotime($job['created_at'])); ?></strong>
+                        <div class="col-sm-6 col-md-4 text-center">
+                            <div class="bg-light p-3 rounded-4">
+                                <i class="fas fa-money-bill-wave text-success fa-xl mb-3"></i>
+                                <small class="text-muted d-block mb-1 text-uppercase ls-wide">Salary Range</small>
+                                <span class="fw-bold text-dark"><?php echo htmlspecialchars($job['salary_range']); ?></span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="d-flex align-items-center">
-                        <i class="fas fa-hourglass-end text-danger me-3 fa-lg"></i>
-                        <div>
-                            <small class="text-muted d-block">Deadline</small>
-                            <strong><?php echo date('M d, Y H:i', strtotime($job['deadline'])); ?></strong>
+                        <div class="col-md-4 text-center">
+                            <div class="bg-light p-3 rounded-4">
+                                <i class="fas fa-hourglass-end text-danger fa-xl mb-3"></i>
+                                <small class="text-muted d-block mb-1 text-uppercase ls-wide">Deadline</small>
+                                <span class="fw-bold text-dark"><?php echo date('M d, H:i', strtotime($job['deadline'])); ?></span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            
-            <hr class="text-muted opacity-25">
-            
-            <h5 class="fw-bold mb-3">Job Description</h5>
-            <div class="p-3 bg-light rounded border-0">
-                <p class="mb-0" style="white-space: pre-line;"><?php echo htmlspecialchars($job['description']); ?></p>
-            </div>
-            
-            <hr class="text-muted opacity-25 my-4">
-            
-            <div class="text-center">
-                <?php if ($is_expired): ?>
-                    <button class="btn btn-secondary btn-lg px-5 disabled" disabled title="This job is no longer accepting applications">
-                        <i class="fas fa-clock me-2"></i> Application Period Ended
-                    </button>
-                <?php elseif ($has_applied): ?>
-                    <button class="btn btn-success btn-lg px-5 disabled" disabled>
-                        <i class="fas fa-check-circle me-2"></i> Application Submitted
-                    </button>
-                <?php else: ?>
-                    <a href="apply_job.php?id=<?php echo $job['job_id']; ?>" class="btn btn-primary btn-lg px-5 shadow-sm">
-                        <i class="fas fa-paper-plane me-2"></i> Apply Now
-                    </a>
-                <?php endif; ?>
-                <a href="browse_jobs.php" class="btn btn-outline-secondary btn-lg ms-3 px-4">
-                    <i class="fas fa-arrow-left me-2"></i> Back to Jobs
-                </a>
+        </div>
+
+        <!-- Sidebar / Action Area -->
+        <div class="col-lg-4">
+            <div class="card border-0 shadow-sm sticky-top" style="top: 20px; z-index: 1;">
+                <div class="card-body p-4">
+                    <h5 class="fw-bold mb-4 text-dark">Ready to apply?</h5>
+                    
+                    <div class="d-grid gap-3">
+                        <?php if ($is_expired): ?>
+                            <div class="text-center p-4 bg-light rounded-4">
+                                <i class="fas fa-lock text-muted fa-3x mb-3 animate-pulse"></i>
+                                <p class="text-muted mb-0 small fw-bold text-uppercase ls-wide">Applications Closed</p>
+                            </div>
+                        <?php elseif ($has_applied): ?>
+                            <div class="text-center p-4 bg-success bg-opacity-10 rounded-4 text-success">
+                                <i class="fas fa-circle-check fa-3x mb-3"></i>
+                                <p class="mb-0 fw-bold">Application Submitted</p>
+                                <small class="opacity-75">You've already applied for this role.</small>
+                            </div>
+                        <?php else: ?>
+                            <a href="apply_job.php?id=<?php echo $job['job_id']; ?>" class="btn btn-primary btn-lg py-3 rounded-3 shadow">
+                                <i class="fas fa-paper-plane me-2"></i> Apply for this Role
+                            </a>
+                        <?php endif; ?>
+                        
+                        <a href="browse_jobs.php" class="btn btn-outline-secondary py-3 rounded-3 border-2">
+                            <i class="fas fa-arrow-left me-2"></i> Browse more jobs
+                        </a>
+                    </div>
+
+                    <div class="mt-5 pt-4 border-top">
+                        <h6 class="fw-bold mb-3 text-dark">Safety Tips</h6>
+                        <ul class="list-unstyled small text-muted">
+                            <li class="mb-2"><i class="fas fa-shield-halved text-success me-2"></i> Never pay for a job interview</li>
+                            <li class="mb-2"><i class="fas fa-user-check text-info me-2"></i> Verify employer credentials</li>
+                            <li><i class="fas fa-circle-info text-warning me-2"></i> Report suspicious listings</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

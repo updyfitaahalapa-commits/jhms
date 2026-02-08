@@ -71,63 +71,82 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link href="assets/css/style.css" rel="stylesheet">
     <style>
         body { 
-            background: linear-gradient(135deg, var(--primary-color) 0%, #004085 100%);
+            background: linear-gradient(135deg, var(--deep-obsidian) 0%, var(--primary-color) 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-family: 'Inter', sans-serif;
+            padding: 20px;
         }
         .login-card {
-            max-width: 400px;
+            max-width: 440px;
             width: 100%;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
         }
-        .login-header {
-            background-color: white;
-            padding: 30px 20px 10px;
-            text-align: center;
+        .form-control {
+            padding: 0.75rem 1rem;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            background-color: #f8fafc;
         }
-        .login-body {
+        .form-control:focus {
             background-color: white;
-            padding: 20px 30px 40px;
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+            border-color: var(--primary-color);
+        }
+        .btn-login {
+            border-radius: 12px;
+            padding: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(99, 102, 241, 0.3);
         }
     </style>
 </head>
 <body>
 
-<div class="login-card">
-    <div class="login-header">
-        <h3 class="fw-bold text-primary mb-1">Welcome Back</h3>
-        <p class="text-muted small">Sign in to continue to JHMS</p>
+<div class="login-card fade-in-up">
+    <div class="mb-5 text-center">
+        <h2 class="fw-bold text-dark mb-2">Welcome Back</h2>
+        <p class="text-muted">Enter your credentials to access your dashboard.</p>
     </div>
-    <div class="login-body">
-        <?php if ($error): ?>
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <i class="fas fa-exclamation-circle me-1"></i> <?php echo htmlspecialchars($error); ?>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        <?php endif; ?>
-        
-        <form action="login.php" method="POST">
-            <div class="form-floating mb-3">
-                <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" required>
-                <label for="email">Email Address</label>
-            </div>
-            
-            <div class="form-floating mb-4">
-                <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
-                <label for="password">Password</label>
-            </div>
-            
-            <button type="submit" class="btn btn-primary w-100 py-2 fw-bold mb-3">Sign In</button>
-        </form>
-        
-        <div class="text-center">
-            <p class="mb-2 text-muted small">Don't have an account? <a href="register.php" class="text-primary fw-bold text-decoration-none">Register here</a></p>
-            <a href="index.php" class="text-secondary small text-decoration-none"><i class="fas fa-arrow-left me-1"></i> Back to Home</a>
+
+    <?php if ($error): ?>
+        <div class="alert alert-danger border-0 rounded-4 shadow-sm mb-4" role="alert">
+            <i class="fas fa-circle-exclamation me-2"></i> <?php echo htmlspecialchars($error); ?>
         </div>
+    <?php endif; ?>
+    
+    <form action="login.php" method="POST">
+        <div class="mb-3">
+            <label for="email" class="form-label small fw-bold text-muted">EMAIL ADDRESS</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" required>
+        </div>
+        
+        <div class="mb-4">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <label for="password" class="form-label small fw-bold text-muted mb-0">PASSWORD</label>
+                <a href="#" class="text-primary small fw-bold text-decoration-none">Forgot?</a>
+            </div>
+            <input type="password" class="form-control" id="password" name="password" placeholder="••••••••" required>
+        </div>
+        
+        <button type="submit" class="btn btn-primary w-100 btn-login mb-4 shadow">SIGN IN TO JHMS</button>
+    </form>
+    
+    <div class="text-center">
+        <p class="mb-4 text-muted">Don't have an account yet? <a href="register.php" class="text-primary fw-bold text-decoration-none">Create a free account</a></p>
+        <a href="index.php" class="btn btn-light border-0 text-muted rounded-pill px-4">
+            <i class="fas fa-arrow-left me-2"></i> Back to Homepage
+        </a>
     </div>
 </div>
 

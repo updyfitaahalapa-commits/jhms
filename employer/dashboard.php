@@ -23,48 +23,59 @@ $stmt->execute();
 $total_apps = $stmt->fetch()['total_apps'];
 ?>
 
-<div class="container-fluid">
-    <div class="row g-4 mb-4">
+<div class="container-fluid py-4">
+    <div class="row g-4 mb-5 fade-in-up">
+        <!-- Dashboard Header -->
+        <div class="col-12">
+            <h2 class="fw-bold text-dark mb-1">Employer Dashboard</h2>
+            <p class="text-muted">Manage your job listings and track applicants.</p>
+        </div>
+
         <!-- Total Jobs Card -->
         <div class="col-md-6">
-            <div class="card bg-primary text-white h-100 shadow-sm">
-                <div class="card-body d-flex justify-content-between align-items-center">
-                    <div>
-                        <h6 class="text-white-50 text-uppercase mb-2">Total Jobs Posted</h6>
-                        <h2 class="display-4 fw-bold mb-0"><?php echo $total_jobs; ?></h2>
+            <div class="card border-0 shadow-sm h-100 overflow-hidden" style="background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);">
+                <div class="card-body p-4 position-relative">
+                    <div class="position-relative z-index-1">
+                        <h6 class="text-white text-uppercase ls-wide opacity-75 mb-3 small fw-bold">Jobs Posted</h6>
+                        <h2 class="display-5 fw-bold text-white mb-0"><?php echo $total_jobs; ?></h2>
                     </div>
-                    <i class="fas fa-briefcase fa-4x text-white-50"></i>
+                    <i class="fas fa-briefcase position-absolute end-0 bottom-0 opacity-10 translate-middle-y me-4" style="font-size: 5rem; color: #fff;"></i>
                 </div>
             </div>
         </div>
 
         <!-- Total Applications Card -->
         <div class="col-md-6">
-            <div class="card bg-success text-white h-100 shadow-sm">
-                <div class="card-body d-flex justify-content-between align-items-center">
-                    <div>
-                        <h6 class="text-white-50 text-uppercase mb-2">Applications Received</h6>
-                        <h2 class="display-4 fw-bold mb-0"><?php echo $total_apps; ?></h2>
+            <div class="card border-0 shadow-sm h-100 overflow-hidden" style="background: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%);">
+                <div class="card-body p-4 position-relative">
+                    <div class="position-relative z-index-1">
+                        <h6 class="text-white text-uppercase ls-wide opacity-75 mb-3 small fw-bold">Apps Received</h6>
+                        <h2 class="display-5 fw-bold text-white mb-0"><?php echo $total_apps; ?></h2>
                     </div>
-                    <i class="fas fa-users fa-4x text-white-50"></i>
+                    <i class="fas fa-users position-absolute end-0 bottom-0 opacity-10 translate-middle-y me-4" style="font-size: 5rem; color: #fff;"></i>
                 </div>
             </div>
         </div>
     </div>
     
-    <div class="row">
+    <div class="row fade-in-up" style="animation-delay: 0.2s">
         <div class="col-lg-12">
-            <div class="card shadow-sm border-0">
-                <div class="card-header bg-white py-3 border-0">
-                    <h5 class="m-0 fw-bold text-primary"><i class="fas fa-bolt me-2"></i>Quick Actions</h5>
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white py-4 border-0">
+                    <h5 class="m-0 fw-bold text-dark"><i class="fas fa-rocket me-2 text-accent"></i>Quick Actions</h5>
                 </div>
-                <div class="card-body">
-                    <a href="post_job.php" class="btn btn-primary btn-lg me-3 mb-2 shadow-sm">
-                        <i class="fas fa-plus-circle me-2"></i> Post a New Job
-                    </a>
-                    <a href="manage_jobs.php" class="btn btn-outline-primary btn-lg mb-2">
-                        <i class="fas fa-list me-2"></i> Manage Jobs
-                    </a>
+                <div class="card-body pt-0 pb-4">
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="post_job.php" class="btn btn-primary px-5 py-3 shadow-sm rounded-3">
+                            <i class="fas fa-plus-circle me-2"></i> Post a Job
+                        </a>
+                        <a href="manage_jobs.php" class="btn btn-outline-secondary border-2 px-5 py-3 rounded-3">
+                            <i class="fas fa-list-check me-2"></i> Manage Listings
+                        </a>
+                        <a href="view_applicants.php" class="btn btn-outline-secondary border-2 px-5 py-3 rounded-3">
+                            <i class="fas fa-user-graduate me-2"></i> Review Applicants
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

@@ -71,97 +71,114 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link href="assets/css/style.css" rel="stylesheet">
     <style>
         body { 
-            background: linear-gradient(135deg, var(--primary-color) 0%, #004085 100%);
+            background: linear-gradient(135deg, var(--deep-obsidian) 0%, var(--primary-color) 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            font-family: 'Inter', sans-serif;
+            padding: 40px 20px;
         }
         .register-card {
-            max-width: 500px;
+            max-width: 540px;
             width: 100%;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
             background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
         }
-        .register-header {
+        .form-control, .form-select {
+            padding: 0.75rem 1rem;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            background-color: #f8fafc;
+        }
+        .form-control:focus, .form-select:focus {
             background-color: white;
-            padding: 30px 20px 10px;
-            text-align: center;
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+            border-color: var(--primary-color);
         }
-        .register-body {
-            padding: 20px 40px 40px;
+        .btn-register {
+            border-radius: 12px;
+            padding: 14px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+        .btn-register:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(99, 102, 241, 0.3);
         }
     </style>
 </head>
 <body>
 
-<div class="register-card">
-    <div class="register-header">
-        <h3 class="fw-bold text-primary mb-1">Create Account</h3>
-        <p class="text-muted small">Join us to find your dream job or ideal cnadidate</p>
+<div class="register-card fade-in-up">
+    <div class="mb-5 text-center">
+        <h2 class="fw-bold text-dark mb-2">Create Account</h2>
+        <p class="text-muted">Fill in your details to get started with JHMS.</p>
     </div>
-    <div class="register-body">
-        
-        <?php if ($error_msg): ?>
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <i class="fas fa-exclamation-triangle me-1"></i> <?php echo htmlspecialchars($error_msg); ?>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        <?php endif; ?>
-        
-        <?php if ($success_msg): ?>
-            <div class="alert alert-success text-center">
-                <i class="fas fa-check-circle fa-2x mb-2 d-block"></i>
-                <?php echo $success_msg; ?>
-            </div>
-        <?php else: ?>
 
-        <form action="register.php" method="POST">
-            <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="full_name" name="full_name" placeholder="Full Name" required>
-                <label for="full_name">Full Name</label>
+    <?php if ($error_msg): ?>
+        <div class="alert alert-danger border-0 rounded-4 shadow-sm mb-4" role="alert">
+            <i class="fas fa-circle-exclamation me-2"></i> <?php echo htmlspecialchars($error_msg); ?>
+        </div>
+    <?php endif; ?>
+    
+    <?php if ($success_msg): ?>
+        <div class="text-center py-5 glass rounded-4">
+            <div class="bg-success bg-opacity-10 p-4 rounded-circle d-inline-block mb-4 text-success">
+                <i class="fas fa-check-circle fa-4x"></i>
+            </div>
+            <h3 class="fw-bold text-dark mb-3">Registration Successful!</h3>
+            <p class="text-muted mb-4">Welcome to the community. You can now access your dashboard.</p>
+            <a href="login.php" class="btn btn-primary px-5 py-3 rounded-pill shadow">
+                CONTINUE TO LOGIN <i class="fas fa-arrow-right ms-2"></i>
+            </a>
+        </div>
+    <?php else: ?>
+
+    <form action="register.php" method="POST">
+        <div class="row g-3">
+            <div class="col-12 text-start">
+                <label for="full_name" class="form-label small fw-bold text-muted">FULL NAME</label>
+                <input type="text" class="form-control" id="full_name" name="full_name" placeholder="E.g. Ali Ahmed" required>
             </div>
             
-            <div class="form-floating mb-3">
+            <div class="col-md-7 text-start">
+                <label for="email" class="form-label small fw-bold text-muted">EMAIL ADDRESS</label>
                 <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" required>
-                <label for="email">Email Address</label>
             </div>
-            
-            <div class="form-floating mb-3">
+
+            <div class="col-md-5 text-start">
+                <label for="role" class="form-label small fw-bold text-muted">ACCOUNT TYPE</label>
                 <select class="form-select" id="role" name="role" required>
                     <option value="" disabled selected>Select Role</option>
                     <option value="seeker">Job Seeker</option>
                     <option value="employer">Employer</option>
                 </select>
-                <label for="role">I am a...</label>
             </div>
 
-            <div class="row g-2 mb-4">
-                <div class="col-md-6">
-                    <div class="form-floating">
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
-                        <label for="password">Password</label>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-floating">
-                        <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required>
-                        <label for="confirm_password">Confirm Password</label>
-                    </div>
-                </div>
+            <div class="col-md-6 text-start">
+                <label for="password" class="form-label small fw-bold text-muted">PASSWORD</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="••••••••" required>
             </div>
 
-            <button type="submit" class="btn btn-primary w-100 py-2 fw-bold mb-3">Register</button>
-        </form>
-        <?php endif; ?>
-        
-        <div class="text-center">
-            <p class="mb-2 text-muted small">Already have an account? <a href="login.php" class="text-primary fw-bold text-decoration-none">Login here</a></p>
-            <a href="index.php" class="text-secondary small text-decoration-none"><i class="fas fa-arrow-left me-1"></i> Back to Home</a>
+            <div class="col-md-6 text-start">
+                <label for="confirm_password" class="form-label small fw-bold text-muted">CONFIRM</label>
+                <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="••••••••" required>
+            </div>
         </div>
+
+        <button type="submit" class="btn btn-primary w-100 btn-register mt-5 mb-4 shadow">CREATE MY ACCOUNT</button>
+    </form>
+    <?php endif; ?>
+    
+    <div class="text-center mt-4">
+        <p class="mb-4 text-muted">Already have an account? <a href="login.php" class="text-primary fw-bold text-decoration-none">Sign in here</a></p>
+        <a href="index.php" class="btn btn-light border-0 text-muted rounded-pill px-4">
+            <i class="fas fa-arrow-left me-2"></i> Back to Homepage
+        </a>
     </div>
 </div>
 
