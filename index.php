@@ -349,7 +349,7 @@ $recent_jobs = $stmt->fetchAll();
                 <p class="small text-white-50 mb-4 fw-medium">Subscribe for weekly high-impact job alerts.</p>
                 <div class="input-group mb-3">
                     <input type="text" class="form-control bg-white bg-opacity-10 border-0 text-white px-3 py-3 rounded-start" placeholder="Email...">
-                    <button class="btn btn-accent px-3 py-3 rounded-end">Join</button>
+                    <button class="btn btn-light text-dark px-3 py-3 rounded-end fw-bold">Join</button>
                 </div>
             </div>
         </div>
