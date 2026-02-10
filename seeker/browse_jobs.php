@@ -86,7 +86,7 @@ $categories = ['IT', 'Marketing', 'Finance', 'Engineering', 'Healthcare', 'Educa
         <div class="col-12">
             <div class="d-flex justify-content-between align-items-end mb-5 px-1">
                 <div>
-                    <h2 class="fw-bold text-dark mb-1">Available Roles</h2>
+                    <h2 class="fw-bold text-dark mb-1">Available Jobs</h2>
                     <p class="text-muted mb-0">Discover your next career milestone in Somalia.</p>
                 </div>
                 <span class="text-muted small fw-bold text-uppercase ls-wide border-bottom border-2 border-primary pb-1">

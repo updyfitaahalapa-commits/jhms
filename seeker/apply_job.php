@@ -12,11 +12,6 @@ $job_id = $_GET['id'];
 $seeker_id = $_SESSION['user_id'];
 $message = '';
 
-if (!$job) {
-    header("Location: browse_jobs.php");
-    exit();
-}
-
 // Fetch full job data for expiration check
 $check_exp_stmt = $conn->prepare("SELECT title, deadline FROM jobs WHERE job_id = :job_id");
 $check_exp_stmt->bindParam(':job_id', $job_id);

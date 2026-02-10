@@ -164,7 +164,7 @@ $recent_jobs = $stmt->fetchAll();
                                 <i class="fas <?php echo $c['icon']; ?> fa-xl text-accent"></i>
                             </div>
                             <h6 class="fw-bold text-dark mb-1 d-block"><?php echo $c['name']; ?></h6>
-                            <small class="text-muted"><?php echo $c['count']; ?> Live Roles</small>
+                            <small class="text-muted"><?php echo $c['count']; ?> Live Jobs</small>
                         </div>
                     </a>
                 </div>

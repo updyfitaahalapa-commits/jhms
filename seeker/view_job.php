@@ -122,7 +122,7 @@ $is_expired = strtotime($job['deadline']) < time();
                             </div>
                         <?php else: ?>
                             <a href="apply_job.php?id=<?php echo $job['job_id']; ?>" class="btn btn-primary btn-lg py-3 rounded-3 shadow">
-                                <i class="fas fa-paper-plane me-2"></i> Apply for this Role
+                                <i class="fas fa-paper-plane me-2"></i> Apply for this Job
                             </a>
                         <?php endif; ?>
                         
